@@ -16,7 +16,7 @@ export default function Contact() {
           <a href="mailto:partnerships@engagent.nl" className="inline-flex items-center gap-2 px-7 py-3 rounded-lg text-sm font-semibold bg-green text-black hover:opacity-90 hover:-translate-y-px transition-all">
             Get in Touch <span className="opacity-60">→</span>
           </a>
-          <a href="#" className="inline-flex items-center gap-2 px-7 py-3 rounded-lg text-sm font-semibold text-body border border-line-strong hover:border-green/20 hover:text-heading transition-all">
+          <a href="https://form.typeform.com/to/uGhjqQwy" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-7 py-3 rounded-lg text-sm font-semibold text-body border border-line-strong hover:border-green/20 hover:text-heading transition-all">
             Join the Waitlist
           </a>
         </div>
