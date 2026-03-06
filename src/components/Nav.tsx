@@ -16,9 +16,8 @@ export default function Nav() {
 
   return (
     <nav className="fixed inset-x-0 top-0 z-50 h-14 flex items-center justify-between px-6 md:px-12 bg-bg/90 backdrop-blur-xl border-b border-line">
-      <a href="#" className="flex items-center gap-2">
-        <Image src="/BlockSightLogo.webp" alt="BlockSight" width={24} height={24} className="rounded" />
-        <span className="font-mono text-sm font-semibold tracking-tight text-heading">BlockSight</span>
+      <a href="#" className="flex items-center">
+        <Image src="/BlockSightLogo-removebg.png" alt="BlockSight" width={150} height={160} className="w-[150px] h-40" />
       </a>
 
       {/* Desktop */}
