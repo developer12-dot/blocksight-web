@@ -9,13 +9,53 @@ const rows = [
   { cap: 'Closed-loop data flywheel', dune: '—', kaito: '—', moonpay: '—', bs: '✓' },
 ]
 
+const competitors = [
+  { key: 'dune' as const, name: 'Dune / Nansen' },
+  { key: 'kaito' as const, name: 'Kaito' },
+  { key: 'moonpay' as const, name: 'Moonpay / Crossmint' },
+]
+
+function CellValue({ val, highlight }: { val: string; highlight?: boolean }) {
+  const isCheck = val.startsWith('✓')
+  const isDash = val === '—'
+  if (isCheck) return <span className="text-green font-medium">{val}</span>
+  if (isDash) return <span className="text-muted">—</span>
+  return <span className={highlight ? 'text-heading font-medium' : 'text-body'}>{val}</span>
+}
+
 function Cell({ val, highlight }: { val: string; highlight?: boolean }) {
   const isCheck = val.startsWith('✓')
   const isDash = val === '—'
   return (
-    <td className={`px-5 py-4 text-[13px] border-b border-line bg-bg-elevated ${highlight ? 'text-heading font-medium' : 'text-body'}`}>
+    <td className={`px-4 py-3 text-[12px] border-b border-line bg-bg-elevated whitespace-nowrap ${highlight ? 'text-heading font-medium' : 'text-body'}`}>
       {isCheck ? <span className="text-green">{val}</span> : isDash ? <span className="text-muted">—</span> : val}
     </td>
+  )
+}
+
+function MobileCard({ row }: { row: typeof rows[0] }) {
+  return (
+    <div className="border border-line rounded-xl overflow-hidden bg-bg-elevated">
+      <div className="px-4 py-3 bg-bg border-b border-line">
+        <h4 className="text-[14px] font-semibold text-heading">{row.cap}</h4>
+      </div>
+      <div className="divide-y divide-line">
+        {competitors.map((comp) => (
+          <div key={comp.key} className="px-4 py-2.5 flex justify-between items-center">
+            <span className="text-[12px] text-muted">{comp.name}</span>
+            <span className="text-[12px]">
+              <CellValue val={row[comp.key]} />
+            </span>
+          </div>
+        ))}
+        <div className="px-4 py-3 flex justify-between items-center bg-green/[0.03]">
+          <span className="text-[12px] text-green font-medium">BlockSight + Engagent</span>
+          <span className="text-[12px]">
+            <CellValue val={row.bs} highlight />
+          </span>
+        </div>
+      </div>
+    </div>
   )
 }
 
@@ -24,7 +64,7 @@ export default function Comparison() {
     <section className="relative py-28 bg-bg-elevated" id="comparison">
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-line-strong to-transparent" />
       <div className="max-w-[1100px] mx-auto px-6 md:px-14">
-        <div className="mb-14">
+        <div className="mb-10 md:mb-14">
           <div className="font-mono text-[11px] font-medium tracking-[2.5px] uppercase text-muted mb-3.5">Why BlockSight + Engagent</div>
           <h2 className="font-serif text-[clamp(28px,3.2vw,42px)] font-normal leading-[1.18] tracking-tight max-w-[620px] mb-3.5">Others analyze. We act.</h2>
           <p className="text-[15px] font-light text-body max-w-[540px] leading-[1.7]">
@@ -32,21 +72,30 @@ export default function Comparison() {
           </p>
         </div>
 
-        <div className="overflow-x-auto">
+        {/* Mobile: Card layout */}
+        <div className="flex flex-col gap-4 md:hidden">
+          {rows.map((r, i) => (
+            <MobileCard key={i} row={r} />
+          ))}
+          <p className="text-center text-[12px] text-muted mt-2 italic">Competitive comparison matrix</p>
+        </div>
+
+        {/* Desktop: Table layout */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full border border-line rounded-xl overflow-hidden" style={{ borderCollapse: 'separate', borderSpacing: 0 }}>
             <thead>
               <tr>
-                <th className="px-5 py-4 text-left text-[12px] font-semibold text-heading bg-bg border-b border-line">Capability</th>
-                <th className="px-5 py-4 text-left text-[12px] font-semibold text-heading bg-bg border-b border-line">Dune / Nansen</th>
-                <th className="px-5 py-4 text-left text-[12px] font-semibold text-heading bg-bg border-b border-line">Kaito</th>
-                <th className="px-5 py-4 text-left text-[12px] font-semibold text-heading bg-bg border-b border-line">Moonpay / Crossmint</th>
-                <th className="px-5 py-4 text-left text-[12px] font-semibold text-green bg-bg border-b border-line">BlockSight + Engagent</th>
+                <th className="px-4 py-3 text-left text-[11px] font-semibold text-heading bg-bg border-b border-line">Capability</th>
+                <th className="px-4 py-3 text-left text-[11px] font-semibold text-heading bg-bg border-b border-line">Dune / Nansen</th>
+                <th className="px-4 py-3 text-left text-[11px] font-semibold text-heading bg-bg border-b border-line">Kaito</th>
+                <th className="px-4 py-3 text-left text-[11px] font-semibold text-heading bg-bg border-b border-line">Moonpay / Crossmint</th>
+                <th className="px-4 py-3 text-left text-[11px] font-semibold text-green bg-bg border-b border-line">BlockSight + Engagent</th>
               </tr>
             </thead>
             <tbody>
               {rows.map((r, i) => (
                 <tr key={i}>
-                  <td className="px-5 py-4 text-[13px] font-medium text-heading border-b border-line bg-bg-elevated">{r.cap}</td>
+                  <td className="px-4 py-3 text-[12px] font-medium text-heading border-b border-line bg-bg-elevated">{r.cap}</td>
                   <Cell val={r.dune} />
                   <Cell val={r.kaito} />
                   <Cell val={r.moonpay} />

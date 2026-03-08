@@ -36,7 +36,7 @@ export default function Technology() {
             NASA-Heritage AI Applied to On-Chain Behavior
           </h2>
           <p className="text-[15px] font-light text-body max-w-[540px] leading-[1.7]">
-            Our Chief Scientist Dr. Petrus C. Martens spent 20+ years building predictive ML systems for NASA&apos;s Artemis program. The same longitudinal modeling techniques now power wallet behavior prediction.
+            Our Chief Scientist Dr. Petrus C. Martens spent 30+ years building predictive ML systems for NASA&apos;s Artemis program. The same longitudinal modeling techniques now power wallet behavior prediction.
           </p>
         </div>
 
